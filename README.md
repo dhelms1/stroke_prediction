@@ -17,6 +17,13 @@ The data originated from the [Kaggle](https://www.kaggle.com/fedesoriano/stroke-
 - [StatsModels](https://www.statsmodels.org/stable/index.html) - used for statistical modeling (GLMs).
 - [ImBalanced-Learn](https://imbalanced-learn.org/stable/) - used for sampling methods and ensemble classifiers.
 
+#### Data Format:
+For the statistical modeling section, the data was reformatted in two ways to accommodate the large class imbalance (around 20x more observations of "No Stroke" compared to "Stroke"):
+- Training data was balanced by using SMOTE (Synthetic Minority Oversampling Technique) to increased of minority "stroke" class to a 3:4 ratio with the majority class "no stroke". This resulted in around 3400 majority observations (0) and 2500 minority observations (1).
+- Testing data was balanced using the NearMiss algorithm, which undersampled the majority class to a 4:3 ratio with the minority class. This resulted in around 120 majority and 90 minority observations to be used for evaluation. *Note: when evaluating based on oversampled data, I did not feel the results were as accurate since repeated observations were increasing the scores. I want the model to be prepared for real world data rather than higher metrics on repeated data.*
+
+For the ensemble modeling section, the data was reformatted... *To be filled in*
+
 ---
 
 ### Findings
