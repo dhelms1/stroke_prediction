@@ -1,3 +1,15 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import accuracy_score, precision_score, recall_score, make_scorer
+from sklearn.metrics import fbeta_score, classification_report, confusion_matrix
+sns.set_style("darkgrid", {'axes.edgecolor': 'black'})
+plt.rcParams['font.size'] = 12
+plt.rcParams['axes.titlesize'] = 16
+plt.rcParams["legend.edgecolor"] = 'black'
+plt.rcParams["legend.fontsize"] = 13
+
 def weight(row):
     if row['bmi'] >= 30:
         val = 'obese'
@@ -136,6 +148,47 @@ def plot_search_results(results):
         plt.xticks(xticks)
     plt.show();
     return None
+
+def cross_val_model(model, X, y, beta):
+    '''
+    Cross-validate multiple models, returning a graph of multiple evaluation metrics
+    to help choose an initial model. 
+    '''
+    fbeta = make_scorer(fbeta_score, beta=beta)
+    score_methods = {'accuracy': 'accuracy', 'precision': 'precision', 'recall': 'recall', 'fbeta': fbeta}
+    scores = cross_validate(model, X, y, scoring=score_methods)
+    model_name = str(model).split('(')[0]
+    print(model_name)
+    plt.figure(figsize=(16,4))
+    xticks = np.arange(1,6)
+    colors = ['blue', 'red', 'green', 'orange']
+    index = ['test_accuracy', 'test_precision', 'test_recall', 'test_fbeta']
+    titles = list(score_methods.keys())
+    for i, idx in enumerate(index):
+        ax = plt.subplot(1,4,i+1)
+        sns.scatterplot(x=xticks, y=scores[idx], color=colors[i])
+        plt.xlabel('Data Split')
+        plt.title(f'{titles[i].capitalize()} ({round((scores[idx].mean()*100),2)}%)')
+        plt.ylabel(' ')
+        plt.xticks(xticks)
+    plt.show();
+    return None
+
+def plot_feature_importance(X, model):
+    '''
+    Graph the feature importance for a given model. Returns data frame used for graphing
+    '''
+    feats_importance = pd.DataFrame()
+    feats_importance['Feature'] = X.columns
+    feats_importance['Importance'] = model.feature_importances_
+    feats_importance.sort_values(by='Importance', ascending=False, inplace=True)
+    plt.figure(figsize=(7,5))
+    sns.barplot(x='Feature', y='Importance', data=feats_importance, palette=sns.color_palette("viridis",len(feats_importance)))
+    plt.xticks(rotation=90)
+    plt.xlabel(' ')
+    plt.title('Feature Importance')
+    plt.show();
+    return feats_importance
 
 
 
