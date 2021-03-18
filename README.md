@@ -18,22 +18,31 @@ The data originated from the [Kaggle](https://www.kaggle.com/fedesoriano/stroke-
 - [ImBalanced-Learn](https://imbalanced-learn.org/stable/) - used for sampling methods and ensemble classifiers.
 
 #### Data Format:
-For the statistical modeling section, the data was reformatted in two ways to accommodate the large class imbalance (around 20x more observations of "No Stroke" compared to "Stroke"):
+For the **statistical modeling** section, the data was reformatted in two ways to accommodate the large class imbalance (around 20x more observations of "No Stroke" compared to "Stroke"):
 - Training data was balanced by using SMOTE (Synthetic Minority Oversampling Technique) to increased of minority "stroke" class to a 3:4 ratio with the majority class "no stroke". This resulted in around 3400 majority observations (0) and 2500 minority observations (1).
 - Testing data was balanced using the NearMiss algorithm, which undersampled the majority class to a 4:3 ratio with the minority class. This resulted in around 120 majority and 90 minority observations to be used for evaluation. *Note: when evaluating based on oversampled data, I did not feel the results were as accurate since repeated observations were increasing the scores. I want the model to be prepared for real world data rather than higher metrics on repeated data.*
 
-For the ensemble modeling section, the data was reformatted... *To be filled in*
+For the **ensemble modeling** section, the data was reformatted in the following ways to accommodate the class imbalance:
+- Training data was left untouched since the ensemble algorithms we used are able to handle the imbalance within the model itself.
+- Testing data was resampled so that we would have a "Stroke" to "No Stroke" ratio of 2:3, resulting in around 50 minority and 75 majority observations (slightly smaller than the statistical modeling data).
+- An important note is that the extra observations from the majority class (after being undersampled) in the testing data were added back into the training data so that we had more data to train on. This was due to the algorithms being able to handle class imbalance (so more majority observations would not have a negative effect).
 
 ---
 
 ### Findings
 #### Statistical Modeling:
-For the statistical modeling section, each of the 3 final models were selected using a feature subset selection process (Best, Forwards, and Backwards). Each of the 3 models selected the same subset of 4 features, all of which were statistically significant (p-value < 0.05) and included: *age, bmi, age_over_45, & never_smoked*. From the base model (fit on all features), we have the following improvements:  
+For the statistical modeling section, we first fit an initial model using all features that resulted in the following output:
+
+*Include image here...*
+
+Following this, 3 models were fit using a feature subset selection process (Best, Forwards, and Backwards). Each of the 3 models selected the same subset of 4 features, all of which were statistically significant (p-value < 0.05) and included: *age, bmi, age_over_45, & never_smoked*. From the base model (fit on all features), we have the following improvements:  
 - True Negatives decreased by 2, while False Positives increased by 2 (*more people classified as stroke that did not have a stroke*).
 - False Negative decreased by 21, while True Positives increased by 21 (*more people classified as stroke that actually had a stroke*).
 - Precision increased from 57% to 66%.
 - Recall increased from 58% to 82% (*this was the most important evaluation metric to improve*).
-- Accuracy increased from 63% to 84%.
+- Accuracy increased from 63% to 74%.
+
+*Include image here...*
 
 #### Ensemble Modeling:
 *To be filled in...*
