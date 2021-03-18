@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import accuracy_score, precision_score, recall_score, make_scorer
 from sklearn.metrics import fbeta_score, classification_report, confusion_matrix
+from sklearn.model_selection import cross_validate
 sns.set_style("darkgrid", {'axes.edgecolor': 'black'})
 plt.rcParams['font.size'] = 12
 plt.rcParams['axes.titlesize'] = 16
