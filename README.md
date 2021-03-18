@@ -62,6 +62,7 @@ Comparing the statistical and ensemble models, we can see that the ensemble mode
 - Accuracy: Ensemble model has a 7% advantage.
 - Precision: Ensemble model has a 5% advantage.
 - Recall: Ensemble model has a 6% advantage.
+
 An important note is that the two model types were trained and tested on different data. The statistical model had oversampling of the minority class for the training data in order to balance it since we could not handle the imbalance within the model itself (but the testing data was undersampled). The ensemble model had regular training data (not balanced) but the testing data was undersampled and slightly smaller (extra observations left over from the undersampling were also added back into training since imbalanced data was not a concern).
 
 Overall, the ensemble model seems to be slightly stronger in all evaluation aspects. The computational speeds were similar for both models. Places to improve upon for our models would to be to try and get the data splits to be more similar in order to have more validity to our statement of the stronger model.
