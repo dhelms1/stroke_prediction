@@ -41,4 +41,20 @@ Following this, 3 models were fit using a feature subset selection process (Best
 *Note: Backwards Feature Selection is shown, but all 3 methods had same confusion matrix and evaluation metrics.*
 
 #### Ensemble Modeling:
+For the ensemble modeling section, we used the ImBalanced-Learn API (linked above in the extra libraries section) which has similar ensemble methods to Sklearn, but better suited to handle imbalanced classes. To model chosen for this section is the BalancedRandomForestClassifier, which had the highest recall of the 3 initial models that were fit (see ensemble modeling section in notebook for more details). The initial BRFC model had the following results:
+
+<img src="/rm_img/ens_base.jpg" width="300"> <img src="/rm_img/ens_met.jpg" width="425">
+
+After fitting the above model, we proceeded with hyperparameter tuning in order to see if we could improve our results. However, the tuned model (for the most part) was equivalent to the initial model except for one change. The number of estimators was changed from 100 to 25, which had no negative impact on the predicted results and doubled the computational speed of the model. The confusion matrix and evaluation metrics for the tuned model were the same as above (so they will not be shown), but the following feature importance were graphed for the tuned model:
+
+<img src="/rm_img/ens_feat_importance.jpg" width="300">
+
+An important note is that the *age, bmi, and avg_glucose_levels* were not normalized and all other features had discrete values in the range [0,1], but normalizing the inputs resulted in the same feature importance but with worse performance.
+
+*Note: The tuned model was also run through the [Exhaustive Feature Selector](http://rasbt.github.io/mlxtend/user_guide/feature_selection/ExhaustiveFeatureSelector/) for mlxtend to find the best combination of features (ranging from 2 to 7), but the subset model had slightly worse performance. The original tuned model was kept due to this (see end of notebook for more info).*
+
+---
+
+### Conclusion
 *To be filled in...*
+
