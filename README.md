@@ -21,6 +21,8 @@ For the **ensemble modeling** section, the data was reformatted in the following
 - Testing data was resampled so that we would have a "Stroke" to "No Stroke" ratio of 2:3, resulting in around 50 minority and 75 majority observations (slightly smaller than the statistical modeling data).
 - An important note is that the extra observations from the majority class (after being undersampled) in the testing data were added back into the training data so that we had more data to train on. This was due to the algorithms being able to handle class imbalance (so more majority observations would not have a negative effect).
 
+**IMPORTANT**: *see conclusion for details about difference in data for both models*.
+
 ---
 
 ## Findings
@@ -56,5 +58,10 @@ An important note is that the *age, bmi, and avg_glucose_levels* were not normal
 ---
 
 ## Conclusion
-*To be filled in...*
+Comparing the statistical and ensemble models, we can see that the ensemble model seems to be performing better (although not be a large margin). We have the following difference based on the final models for both types:
+- Accuracy: Ensemble model has a 7% advantage.
+- Precision: Ensemble model has a 5% advantage.
+- Recall: Ensemble model has a 6% advantage.
+An important note is that the two model types were trained and tested on different data. The statistical model had oversampling of the minority class for the training data in order to balance it since we could not handle the imbalance within the model itself (but the testing data was undersampled). The ensemble model had regular training data (not balanced) but the testing data was undersampled and slightly smaller (extra observations left over from the undersampling were also added back into training since imbalanced data was not a concern).
 
+Overall, the ensemble model seems to be slightly stronger in all evaluation aspects. The computational speeds were similar for both models. Places to improve upon for our models would to be to try and get the data splits to be more similar in order to have more validity to our statement of the stronger model.
