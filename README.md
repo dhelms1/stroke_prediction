@@ -51,7 +51,7 @@ After fitting the above model, we proceeded with hyperparameter tuning in order 
 
 An important note is that the *age, bmi, and avg_glucose_levels* were not normalized and all other features had discrete values in the range [0,1], but normalizing the inputs resulted in the same feature importance but with worse performance.
 
-*Note: The tuned model was also run through the [Exhaustive Feature Selector](http://rasbt.github.io/mlxtend/user_guide/feature_selection/ExhaustiveFeatureSelector/) for mlxtend to find the best combination of features (ranging from 2 to 7), but the subset model had slightly worse performance. The original tuned model was kept due to this (see end of notebook for more info).*
+*Note: The tuned model was also run through the [Exhaustive Feature Selector](http://rasbt.github.io/mlxtend/user_guide/feature_selection/ExhaustiveFeatureSelector/) for mlxtend to find the best combination of features (ranging from 2 to 7 features), but the subset model had slightly worse performance. The original tuned model was kept due to this (see end of notebook for more info).*
 
 ---
 
