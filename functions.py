@@ -191,7 +191,44 @@ def plot_feature_importance(X, model):
     plt.show();
     return feats_importance
 
+def sampled_data_split(data):
+    '''
+    Split data into training and testing sets, randomly under-sample the
+    test data to balance classes, randomly over-sample the training data
+    to balance classes, and return new training and testing data.
+    '''
+    stroke_obs = data[data.stroke == 1]
+    no_stroke_obs = data[data.stroke == 0]
 
+    sample_size = np.ceil(0.2 * len(stroke_obs))
+    stroke_sample = stroke_obs.sample(n=int(sample_size), random_state=42, axis=0)
+    stroke_extra = pd.concat([stroke_obs, stroke_sample]).loc[stroke_obs.index.symmetric_difference(stroke_sample.index)]
+
+    sample_size = np.ceil(len(stroke_sample)*1.5)
+    no_stroke_sample = no_stroke_obs.sample(n=int(sample_size), random_state=42, axis=0)
+    no_stroke_extra = pd.concat([no_stroke_obs, 
+                                 no_stroke_sample]).loc[no_stroke_obs.index.symmetric_difference(no_stroke_sample.index)]
+
+    train_set = shuffle(pd.concat([stroke_extra, no_stroke_extra], axis=0))
+    test_set = shuffle(pd.concat([stroke_sample, no_stroke_sample], axis=0))
+    X_train, y_train = train_set.drop('stroke', axis=1), train_set.stroke
+    X_test, y_test = test_set.drop('stroke', axis=1), test_set.stroke
+
+    plt.figure(figsize=(10,4))
+    ax1 = plt.subplot(1,2,1)
+    sns.countplot(y_train, palette=sns.color_palette("viridis",2))
+    plt.xlabel('Classes')
+    plt.ylabel('Occurance Count')
+    plt.title('Training Split')
+    ax2 = plt.subplot(1,2,2)
+    sns.countplot(y_test, palette=sns.color_palette("viridis",5))
+    plt.xlabel('Classes')
+    plt.ylabel('Occurance Count')
+    plt.title('Testing Split')
+    plt.tight_layout()
+    plt.show();
+    
+    return X_train, X_test, y_train, y_test
 
 
 
