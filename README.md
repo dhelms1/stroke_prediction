@@ -33,7 +33,7 @@ For the **ensemble modeling** section, the data was reformatted in the following
 #### Statistical Modeling:
 For the statistical modeling section, we first fit an initial model using all features that resulted in the following output:
 
-*Include image here...*
+<img src="/rm_img/glm_base.jpg" width="300">
 
 Following this, 3 models were fit using a feature subset selection process (Best, Forwards, and Backwards). Each of the 3 models selected the same subset of 4 features, all of which were statistically significant (p-value < 0.05) and included: *age, bmi, age_over_45, & never_smoked*. From the base model (fit on all features), we have the following improvements:  
 - True Negatives decreased by 2, while False Positives increased by 2 (*more people classified as stroke that did not have a stroke*).
@@ -42,7 +42,7 @@ Following this, 3 models were fit using a feature subset selection process (Best
 - Recall increased from 58% to 82% (*this was the most important evaluation metric to improve*).
 - Accuracy increased from 63% to 74%.
 
-*Include image here...*
+<img src="/rm_img/glm_final.jpg" width="300"> <img src="/rm_img/glm_met.jpg" width="300">
 
 #### Ensemble Modeling:
 *To be filled in...*
