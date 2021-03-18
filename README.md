@@ -47,7 +47,7 @@ For the ensemble modeling section, we used the ImBalanced-Learn API (linked abov
 
 After fitting the above model, we proceeded with hyperparameter tuning in order to see if we could improve our results. However, the tuned model (for the most part) was equivalent to the initial model except for one change. The number of estimators was changed from 100 to 25, which had no negative impact on the predicted results and doubled the computational speed of the model. The confusion matrix and evaluation metrics for the tuned model were the same as above (so they will not be shown), but the following feature importance were graphed for the tuned model:
 
-<img src="/rm_img/ens_feat_importance.jpg" width="300">
+<img src="/rm_img/ens_feat_importance.jpg" width="450">
 
 An important note is that the *age, bmi, and avg_glucose_levels* were not normalized and all other features had discrete values in the range [0,1], but normalizing the inputs resulted in the same feature importance but with worse performance.
 
