@@ -32,7 +32,7 @@ For the statistical modeling section, we first fit an initial model using all fe
 <img src="/rm_img/glm_base.jpg" width="300"> <img src="/rm_img/glm_base_met.jpg" width="425">
 
 Following this, 3 models were fit using a feature subset selection process (Best, Forwards, and Backwards). Each of the 3 models selected the same subset of 4 features, all of which were statistically significant (p-value < 0.05) and included: *age, bmi, age_over_45, & never_smoked*. From the base model (fit on all features), we have the following improvements:  
-- True Negatives decreased by 2, while False Positives increased by 2 (*more people classified as stroke that did not have a stroke*).
+- True Negatives increased by 2, while False Positives decreased by 2 (*less people classified as stroke that did not have a stroke*).
 - False Negative decreased by 21, while True Positives increased by 21 (*more people classified as stroke that actually had a stroke*).
 - Precision increased from 57% to 66%.
 - Recall increased from 58% to 82% (*this was the most important evaluation metric to improve*).
